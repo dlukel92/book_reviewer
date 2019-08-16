@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Add</title>
+    {%load static%}
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+    <!-- Bootstrap CSS -->
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
+    <link rel='stylesheet' href='{% static 'wall_app/css/add_style.css' %}'>    
+      <script src='{% static 'wall_app/js/script.js' %}'></script>
+</head>
+<body>
+        <nav class='navbar navbar-expand-lg navbar-light bg-light'>
+                <a class='navbar-brand' href='/books'>Submit your book review!</a>
+                <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
+                  <span class='navbar-toggler-icon'></span>
+                </button>
+                <div class='collapse navbar-collapse' id='navbarNav'>
+                  <ul class='navbar-nav'>
+                    <li class='nav-item active'>
+                      
+                    </li>
+                  </ul>
+                </div>
+                
+                <!-- <button action='books/add'></button> -->
+                <a class='navbar-text' href='#'> Log out</a>
+              </nav>
+    <div class='container'>
+           
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            <div class="form_field mt-5">
+    <form action='/add_process' method='post'>
+        {% csrf_token %}
+        
+            <div class='form-group col-md-6'>
+            <label for='form_title'>Title</label>
+            <input type='Title' class='form-control' id='form_title' name='form_title' placeholder='Title'>
+            </div>
+        
+        
+<!-- 
+            <div class='form-group col-md-6'>
+                <h5>Author:</h5>
+                <div class="form-group col-md-12">
+                    <label for='form_author'>Enter a pre-existing Author</label>
+                <select id='form_author' name='form_author' class='form-control'>
+                    {% for book in all_books %}
+                    <option value={{book.author}}>{{book.author}}</option>
+                    {% endfor %}                    
+                </select>
+            </div> -->
+            <div class='form-group col-md-6'>
+                    <label for='form_author'>Author</label>
+                <input type='text' class='form-control' id='form_author' name='form_author' placeholder='Author'>
+            </div>
+        </div>
+
+
+            <div class='form-group col-md-6 d-inline-block'>
+                <label for='form_review'>Enter your review here:</label>
+                <textarea class='form-control' id='form_review' name='form_review' rows='5' columns='8'></textarea>
+                </div>
+
+        <div class='col-2'>
+                <label class='mr-sm-1' for='form_rating'>Rating</label>
+                <select class='custom-select mr-sm-1 mr-md-1' id='form_rating' name='form_rating'>
+    
+                <option value='*'>1 star</option>
+                <option value='**'>2 stars</option>
+                <option value='***'>3 stars</option>
+                <option value='****'>4 stars</option>
+                <option value='*****'>5 stars</option>
+                </select>
+            </div>
+            <div class='col-5 float-right'>
+            <button type='submit' class='btn btn-primary' id='dabutton'>Add Review</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</body>
+</html>

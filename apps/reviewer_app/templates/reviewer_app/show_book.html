@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book Info</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Books</title>
+    {%load static%}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'reviewer_app/css/style.css' %}">    
+        <script src="{% static 'reviewer_app/js/script.js' %}"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/books">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+            <li class="nav-item active">
+                
+            </li>
+            </ul>
+        </div>
+        <a class="navbar-text" href="/books/add">Add a review</a> 
+        <a class="navbar-text" href="/logout" id="log_out_button"> Log out</a>
+        </nav>
+<div class="container">
+    <div class="col-md-6 d-inline-block border-bottom mt-5">
+    <h5>Book Title: {{book.title}}</h5>
+    <h6>Author: {{book.author}}</h6>
+    <h6>{% for reviews in reviews %}</h6>
+    Review: {{reviews.review.title}}<br>
+    Rating: {{reviews.rating}}<br>
+    <a href="/users/{{reviews.reviewer.id}}" id="title">{{reviews.reviewer.first_name}}</a> said: {{reviews.review}}<br>
+            Posted on: {{reviews.created_at}}
+            {% if reviews.reviewer.id == request.session.id %}
+            <form action="/delete_review" method="post" >
+                {% csrf_token %}
+                <button type="submit" id='review_to_delete' name='review_to_delete' value='{{reviews.id}}' class= "btn btn float-right underline"><a href><u>Delete Review</u></a></button>
+            </form>
+            {% endif %}<br><br>
+            
+    {% endfor %}
+    </div>
+    <div class="col-md-5 d-inline-block ml-5 float-right">
+    <form action='/add_process' method='post'>
+    {% csrf_token %}
+    
+
+        <label for='form_title'></label>
+        <input type='hidden' value='{{book.title}}' class='form-control' id='form_title' name='form_title' placeholder='Title'>
+
+
+                <label for='form_author'></label>
+            <input type='hidden' value='{{book.author}}' class='form-control' id='form_author' name='form_author' placeholder='Author'>
+
+        <div class='form-group col-md-12 d-inline-block'>
+            <label for='form_review'>Enter your review here:</label>
+            <textarea class='form-control' id='form_review' name='form_review' rows='5' columns='8'></textarea>
+            </div>
+
+        <div class='col-4'>
+            <label class='mr-sm-1' for='form_rating'>Rating</label>
+            <select class='custom-select mr-sm-1 mr-md-1' id='form_rating' name='form_rating'>
+
+            <option value='*'>1 star</option>
+            <option value='**'>2 stars</option>
+            <option value='***'>3 stars</option>
+            <option value='****'>4 stars</option>
+            <option value='*****'>5 stars</option>
+            </select>
+        </div>
+        <div class='col-5 float-right'>
+        <button type='submit' id='dabutton' class='btn btn-primary'>Submit Review</button>
+        </div>
+    </div>
+    
+</form>
+</div>
+
+</body>
+</html>

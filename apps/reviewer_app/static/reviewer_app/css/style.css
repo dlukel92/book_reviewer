@@ -1,0 +1,24 @@
+
+#log_out_button{
+    margin-left:15px;
+}
+#title{
+    text-decoration: underline;
+}
+
+.user_info{
+    margin-top:100px;
+}
+
+
+/* #book_page_add_review{
+    margin-left:250px;
+    width:400px;
+    display:inline-block;
+    vertical-align:center;
+}
+
+.book_info{
+    width:400px;
+    display:inline-block;
+} */

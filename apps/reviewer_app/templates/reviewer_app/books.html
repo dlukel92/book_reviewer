@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Books</title>
+    {%load static%}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'reviewer_app/css/style.css' %}">    
+      <script src="{% static 'reviewer_app/js/script.js' %}"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/books">Welcome, {{request.session.first_name}}!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              
+            </li>
+          </ul>
+        </div>
+        <a class="navbar-text" href="/books/add">Add a review</a> 
+        <a class="navbar-text" href="/logout" id="log_out_button"> Log out</a>
+      </nav>
+      <div class="container">
+        <div class="col-md-6 d-inline-block mt-4 mr-4">
+        
+
+        <h5>Recent Book Reviews:</h5>
+        
+        <p>
+      
+            {% for review in recent_reviews %}
+          <div class="border-bottom pb-2">
+            
+            <h5><a href="/books/{{review.book.id}}" id="title">Title: {{review.book.title}}</a></h5>
+            
+            Rating: {{review.rating}}<br>
+            <div id="text_review">
+                <a href="/users/{{review.reviewer.id}}">{{review.reviewer.first_name}}</a> says: {{review.review}}
+            </div>
+            Posted on {{review.created_at}}
+
+          </div>
+          {% endfor %}
+
+        </p>
+      </div>
+      <div class="overflow-auto col-md-5 d-inline-block align-top border ml-5 mt-4">
+          
+        <h5>Other Books with Reviews:</h5>
+        {% for review in all_reviews %}
+        <a href="/books/{{review.book.id}}">{{review.book.title}}</a> <br>
+        {% endfor %}
+      </div>
+    </div>
+
+</body>
+</html>

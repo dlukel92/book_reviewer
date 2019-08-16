@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User Info</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Books</title>
+    {%load static%}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'reviewer_app/css/style.css' %}">    
+      <script src="{% static 'reviewer_app/js/script.js' %}"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/books">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                <li class="nav-item active">
+                    
+                </li>
+                </ul>
+            </div>
+            <a class="navbar-text" href="/books/add">Add a review</a> 
+            <a class="navbar-text" href="/logout" id="log_out_button"> Log out</a>
+            </nav>
+    <div class="container">
+
+        <div class="user_info">
+    <h5>User Name: {{user.first_name}} {{user.last_name}}</h5>
+    <h6>Email: {{user.email}}</h6>
+    <h6>Total Reviews: {{count}}</h6>
+    <h6>Posted reviews on the following books:</h6>
+    {% for review in user_reviews %}
+    <h6><a href="/books/{{review.book.id}}" id="title">{{review.book.title}}</a></h6>
+    {% endfor %}
+</div>
+</div>
+</body>
+</html>

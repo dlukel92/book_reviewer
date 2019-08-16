@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book Reviewer</title>
+    {%load static%}
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
+    <link rel="stylesheet" href="{% static 'wall_app/css/style.css' %}">    
+      <script src="{% static 'wall_app/js/script.js' %}"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/books">Welcome to Book Reviewer!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              
+            </li>
+          </ul>
+        </div>
+      </nav>
+    <div class="container d-flex justify-content-center">
+
+
+      <div class="col-md-6 d-inline-block mt-4 mr-4">
+        <h3>Register</h3>
+            <form action="/process" method="post">
+                {% csrf_token %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                <div class="form-group row-xs-4">
+                        <label for="exampleInputName1">First Name</label>
+                        <input type="text" class="form-control" id="form_first_name" name="form_first_name" aria-describedby="nameHelp" placeholder="Enter first name">
+                      </div>
+                      {% if messages %}
+
+{% endif %}
+
+                      <div class="form-group row-sm-4">
+                            <label for="exampleInputName1">Last Name</label>
+                            <input type="text" class="form-control" id="form_last_name" name="form_last_name" aria-describedby="nameHelp" placeholder="Enter first name">
+                          </div>
+                    <div class="form-group row-xs-4">
+
+                      <label for="exampleInputEmail1">Email address</label>
+                      <input type="email" class="form-control" id="form_email" name="form_email" aria-describedby="emailHelp" placeholder="Enter email">
+                      <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                    </div>
+                    <div class="form-group row-xs-4">
+                      <label for="exampleInputPassword1">Password</label>
+                      <input type="password" class="form-control" id="form_password" name="form_password" placeholder="Password">
+                    </div>
+                    <div class="form-group row-xs-4">
+                            <label for="exampleInputConfirmPassword1">Confirm Password</label>
+                            <input type="password" class="form-control" id="form_conf_password" name="form_conf_password" placeholder="Confirm Password">
+                          </div>
+                    <button type="submit" class="btn btn-primary pull-right">Register</button>
+                  </form>
+      </div>
+      <div class="login col-md-4 d-inline-block border-bottom mt-5">
+          <h3>Log in</h3>
+                <form action="/login" method="post">
+                    {% csrf_token %}
+                        <div class="form-group row-xs-4">
+                          <label for="exampleInputEmail1">Email address</label>
+                          <input type="email" class="form-control" id="form_email" name="form_email" aria-describedby="emailHelp" placeholder="Enter email">
+                          <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                        </div>
+                        <div class="form-group row-xs-4">
+                          <label for="exampleInputPassword1">Password</label>
+                          <input type="password" class="form-control" id="form_password" name="form_password" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary pull-right">Log in</button>
+                      </form>
+                    </div>
+
+
+    </div>
+</body>
+
+</html>
